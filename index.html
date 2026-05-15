@@ -3,551 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <meta name="theme-color" content="#0a0f1a">
-    <title>ScreenSpark | شارك شاشتك فورياً</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#0f172a">
+    <title>ScreenSpark | مشاركة شاشة احترافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
     <style>
-        :root {
-            --bg-primary: #0a0a1a;
-            --bg-secondary: #0f0f25;
-            --bg-card: rgba(20, 20, 45, 0.85);
-            --bg-input: #1a1a35;
-            --text-primary: #ffffff;
-            --text-secondary: #cbd5e1;
-            --text-muted: #8f96ad;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --primary: #7c3aed;
-            --primary-dark: #6d28d9;
-            --primary-light: #a78bfa;
-            --primary-glow: rgba(124, 58, 237, 0.35);
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --gradient-1: linear-gradient(135deg, #7c3aed, #a78bfa, #ec4899);
-            --gradient-2: linear-gradient(135deg, #06b6d4, #3b82f6, #7c3aed);
-            --radius-sm: 12px;
-            --radius-md: 18px;
-            --radius-lg: 24px;
-            --radius-xl: 32px;
-            --transition: all 0.3s ease;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        body.light-mode {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.96);
-            --bg-input: #f1f5f9;
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --text-muted: #64748b;
-            --border-color: rgba(0, 0, 0, 0.08);
-            --primary: #6d28d9;
-        }
-        
-        body.gold-mode {
-            --bg-primary: #1a1500;
-            --bg-secondary: #2d2600;
-            --bg-card: rgba(45, 38, 0, 0.92);
-            --bg-input: #3d3500;
-            --text-primary: #ffd700;
-            --text-secondary: #ffed4a;
-            --text-muted: #b8941a;
-            --border-color: #6b5500;
-            --primary: #ffd700;
-            --gradient-1: linear-gradient(135deg, #ffd700, #f59e0b, #d97706);
-        }
-        
-        .animated-bg {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            background: radial-gradient(ellipse at 20% 30%, var(--primary-glow), transparent 55%),
-                        radial-gradient(ellipse at 80% 70%, rgba(236, 72, 153, 0.08), transparent 55%);
-            animation: bgFloat 12s ease-in-out infinite alternate;
-        }
-        
-        @keyframes bgFloat {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
+
         body {
-            font-family: 'Cairo', sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            transition: var(--transition);
-            overflow-x: hidden;
+            background: radial-gradient(circle at 20% 30%, #0f172a, #020617);
+            font-family: 'Inter', sans-serif;
+            color: #f8fafc;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
-        
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--gradient-2);
-            z-index: 10000;
-            transition: width 0.08s linear;
-        }
-        
-        header {
+
+        /* Header جدي */
+        .glass-header {
+            backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
-            background: var(--bg-secondary);
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid var(--border-color);
-            padding: 15px 25px;
+            z-index: 50;
+        }
+
+        .logo-area {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 16px;
+            gap: 12px;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        
         .logo-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: var(--radius-md);
-            background: var(--gradient-1);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4f46e5, #ec4899);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            color: white;
-            box-shadow: 0 0 20px var(--primary-glow);
+            font-size: 1.3rem;
         }
-        
-        .logo-text h1 {
-            font-size: 1.4rem;
-            font-weight: 900;
-            background: var(--gradient-1);
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #fff, #a5f3fc);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
         }
-        
-        .logo-text p {
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: -5px;
+        .theme-toggle {
+            background: rgba(255,255,255,0.05);
+            border: none;
+            color: #cbd5e1;
+            width: 40px;
+            height: 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
         }
-        
-        .nav-actions {
+        .theme-toggle:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* بطاقة التحكم الجدية */
+        .control-card {
+            max-width: 650px;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: 0.3s;
+        }
+
+        .control-card h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .status-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.05);
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+        }
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #10b981;
+        }
+
+        /* أزرار وأقسام الدخول والإنشاء */
+        .action-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .create-session {
+            background: linear-gradient(135deg, #4f46e5, #ec4899);
+            border: none;
+            border-radius: 60px;
+            padding: 1rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(79,70,229,0.3);
+        }
+        .create-session:hover {
+            transform: scale(1.01);
+            box-shadow: 0 12px 28px rgba(79,70,229,0.5);
+        }
+
+        .join-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .join-label {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+        .join-input-group {
             display: flex;
             gap: 12px;
         }
-        
-        .icon-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-        
-        .icon-btn:hover {
-            background: var(--primary);
+        .join-input-group input {
+            flex: 1;
+            background: #0f172a;
+            border: 1px solid #334155;
+            padding: 12px 18px;
+            border-radius: 40px;
             color: white;
-            transform: translateY(-3px);
+            font-family: monospace;
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
         }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px 60px;
+        .join-input-group input:focus {
+            border-color: #4f46e5;
         }
-        
-        .control-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-xl);
-            padding: 45px;
-            backdrop-filter: blur(25px);
-            text-align: center;
+        .join-btn {
+            background: #1e293b;
+            border: 1px solid #4f46e5;
+            padding: 0 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
         }
-        
-        .warning-box {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid var(--danger);
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            margin-bottom: 30px;
+        .join-btn:hover {
+            background: #4f46e5;
         }
-        
-        .warning-box i {
-            font-size: 3rem;
-            color: var(--danger);
-            margin-bottom: 15px;
+
+        /* قسم إدارة الجلسة (بعد بدء الجلسة) */
+        .session-panel {
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
         }
-        
-        .warning-box h3 {
-            margin-bottom: 10px;
-            color: var(--danger);
-        }
-        
-        .warning-box p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-        
-        .fix-steps {
-            background: var(--bg-input);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            text-align: right;
-            margin-top: 20px;
-        }
-        
-        .fix-steps li {
-            margin-bottom: 10px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-        
-        .action-btn {
-            background: var(--gradient-1);
-            border: none;
-            padding: 14px 28px;
+        .room-header {
+            background: #0f172a;
+            padding: 12px 16px;
             border-radius: 60px;
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin: 5px;
-        }
-        
-        .action-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px var(--primary-glow);
-        }
-        
-        .room-link-box {
-            background: var(--bg-input);
-            border-radius: var(--radius-md);
-            padding: 15px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin: 20px 0;
         }
-        
-        .room-link {
-            flex: 1;
+        .room-link-text {
             font-family: monospace;
-            font-size: 0.9rem;
-            color: var(--primary-light);
+            font-size: 0.8rem;
             word-break: break-all;
+            color: #a5f3fc;
         }
-        
-        .copy-link-btn {
-            background: var(--primary);
+        .copy-room {
+            background: #334155;
             border: none;
-            padding: 8px 20px;
-            border-radius: 40px;
+            padding: 8px 18px;
+            border-radius: 30px;
             color: white;
             cursor: pointer;
+            font-size: 0.7rem;
         }
-        
-        .video-container {
+        .video-preview {
+            margin: 1rem 0;
             background: #000;
-            border-radius: var(--radius-lg);
+            border-radius: 1rem;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #334155;
             overflow: hidden;
-            aspect-ratio: 16 / 9;
-            margin: 20px 0;
-            border: 2px solid var(--border-color);
         }
-        
-        .video-container video {
+        video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #4f46e5;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+        }
+        .btn-outline:hover {
+            background: #4f46e5;
+        }
+        .btn-danger {
+            background: rgba(239,68,68,0.2);
+            border: 1px solid #ef4444;
+            color: #fecaca;
+        }
+        .btn-danger:hover {
+            background: #ef4444;
+            color: white;
+        }
+
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: var(--success);
+            transform: translateX(-50%);
+            background: #10b981;
             color: white;
-            padding: 12px 28px;
-            border-radius: 60px;
-            font-weight: 600;
-            z-index: 10000;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 0.8rem;
             opacity: 0;
-            transition: 0.3s;
+            transition: 0.2s;
+            z-index: 200;
             pointer-events: none;
-            font-size: 0.85rem;
-            white-space: nowrap;
         }
-        
         .toast.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(-10px);
         }
-        
-        .toast.error {
-            background: var(--danger);
-        }
-        
         .hidden {
             display: none;
         }
-        
         footer {
             text-align: center;
-            padding: 30px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-top: 30px;
+            padding: 1.5rem;
+            font-size: 0.7rem;
+            color: #64748b;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
-        
-        @media (max-width: 768px) {
-            .container { padding: 25px 15px; }
-            .control-card { padding: 25px; }
-            .action-btn { padding: 10px 18px; font-size: 0.85rem; }
-            .logo-icon { width: 44px; height: 44px; font-size: 22px; }
-            .toast { white-space: normal; text-align: center; max-width: 90%; }
+        @media (max-width: 600px) {
+            .control-card { padding: 1.5rem; }
+            .join-input-group { flex-direction: column; }
+            .room-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
-<div class="animated-bg"></div>
-<div class="scroll-progress" id="scrollProgress"></div>
-
-<header>
-    <div class="logo">
+<div class="glass-header">
+    <div class="logo-area">
         <div class="logo-icon"><i class="fas fa-desktop"></i></div>
-        <div class="logo-text"><h1>ScreenSpark</h1><p>مشاركة شاشة فورية وآمنة</p></div>
+        <div class="logo-text">ScreenSpark</div>
     </div>
-    <div class="nav-actions">
-        <button class="icon-btn" id="themeToggleBtn"><i class="fas fa-palette"></i></button>
-    </div>
-</header>
+    <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+</div>
 
-<main class="container">
+<main class="main-container">
     <div class="control-card" id="mainCard">
-        
-        <!-- رسالة عدم الدعم المحسّنة -->
-        <div id="unsupportedBox" class="warning-box">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3>⚠️ متصفحك لا يدعم مشاركة الشاشة تلقائياً</h3>
-            <p>ميزة مشاركة الشاشة تحتاج إلى تفعيل يدوي في متصفح Chrome</p>
-            
-            <div class="fix-steps">
-                <p style="font-weight: 700; margin-bottom: 10px;">🔧 كيفية التفعيل في Chrome:</p>
-                <ol style="padding-right: 20px;">
-                    <li>1. اكتب في شريط العناوين: <code style="background: #000; padding: 2px 6px; border-radius: 6px;">chrome://flags/#enable-webrtc-getdisplaymedia</code></li>
-                    <li>2. ابحث عن <strong>WebRTC getDisplayMedia</strong></li>
-                    <li>3. غير الإعداد من <strong>Default</strong> إلى <strong>Enabled</strong></li>
-                    <li>4. أعد تشغيل المتصفح</li>
-                </ol>
-                <p style="margin-top: 15px; color: var(--warning);">💡 بديل سريع: استخدم متصفح <strong>Edge</strong> أو <strong>Firefox</strong> مباشرة بدون أي إعدادات</p>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>✨ شارك شاشتك <br> بلحظة</h2>
+            <div class="status-chip"><span class="online-dot"></span> مباشر | WebRTC</div>
+        </div>
+        <p style="color: #94a3b8; margin-top: 8px;">جودة عالية • مشفر • بدون تأخير</p>
+
+        <!-- القسم الرئيسي (اختيار: إنشاء جلسة أو انضمام) -->
+        <div id="entrySection">
+            <div class="action-group">
+                <button class="create-session" id="createRoomBtn"><i class="fas fa-plus-circle"></i> إنشاء جلسة جديدة</button>
+                <div class="join-section">
+                    <span class="join-label"><i class="fas fa-link"></i> انضم إلى جلسة عبر الرابط</span>
+                    <div class="join-input-group">
+                        <input type="text" id="joinRoomInput" placeholder="أدخل رمز الجلسة (مثال: X7K9M2)">
+                        <button class="join-btn" id="joinRoomBtn">انضمام</button>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <!-- الواجهة الرئيسية (تظهر بعد التأكد من الدعم) -->
-        <div id="mainInterface" style="display: none;">
-            <div id="connectionStatus" style="margin-bottom: 20px; display: flex; justify-content: center;">
-                <span style="background: var(--bg-input); padding: 8px 16px; border-radius: 60px; font-size: 0.8rem;">
-                    <i class="fas fa-circle" style="color: var(--success); font-size: 0.5rem;"></i> جاهز للاتصال
-                </span>
+
+        <!-- قسم إدارة الجلسة (بعد إنشاء الجلسة أو الانضمام) -->
+        <div id="sessionPanel" class="hidden session-panel">
+            <div class="room-header">
+                <span class="room-link-text" id="roomLinkDisplay">جاري إنشاء الرابط...</span>
+                <button class="copy-room" id="copyLinkBtn"><i class="fas fa-copy"></i> نسخ الرابط</button>
             </div>
-            
-            <div id="videoArea" style="display: none;">
-                <div class="video-container">
-                    <video id="remoteVideo" autoplay playsinline></video>
-                </div>
+            <div class="video-preview" id="videoContainer" style="display: none;">
+                <video id="remoteVideo" autoplay playsinline></video>
             </div>
-            
-            <div id="mainActions">
-                <button class="action-btn" id="createRoomBtn"><i class="fas fa-plus-circle"></i> إنشاء غرفة جديدة</button>
-                <button class="action-btn action-btn" id="joinRoomBtn"><i class="fas fa-sign-in-alt"></i> انضمام إلى غرفة</button>
+            <div class="action-buttons">
+                <button class="btn-outline" id="startShareBtn"><i class="fas fa-desktop"></i> مشاركة شاشتي</button>
+                <button class="btn-outline hidden" id="stopShareBtn"><i class="fas fa-stop-circle"></i> إيقاف</button>
+                <button class="btn-outline btn-danger" id="leaveRoomBtn"><i class="fas fa-sign-out-alt"></i> مغادرة الجلسة</button>
             </div>
-            
-            <div id="sharingPanel" style="display: none;">
-                <div class="room-link-box">
-                    <span class="room-link" id="roomLinkDisplay"></span>
-                    <button class="copy-link-btn" id="copyLinkBtn"><i class="fas fa-copy"></i> نسخ</button>
-                </div>
-                <div>
-                    <button class="action-btn" id="startShareBtn"><i class="fas fa-desktop"></i> مشاركة شاشتي</button>
-                    <button class="action-btn action-btn" id="stopShareBtn" style="display: none;"><i class="fas fa-stop-circle"></i> إيقاف</button>
-                    <button class="action-btn action-btn" id="leaveRoomBtn"><i class="fas fa-sign-out-alt"></i> مغادرة</button>
-                </div>
-            </div>
-            
-            <div id="joinPanel" style="display: none;">
-                <div class="room-link-box">
-                    <input type="text" id="roomIdInput" class="room-link" placeholder="أدخل رمز الغرفة" style="background: transparent; border: none; outline: none;">
-                    <button class="copy-link-btn" id="confirmJoinBtn"><i class="fas fa-check"></i> تأكيد</button>
-                </div>
-                <button class="action-btn" id="cancelJoinBtn"><i class="fas fa-arrow-right"></i> إلغاء</button>
-            </div>
+            <p style="font-size: 0.7rem; color: #64748b; text-align: center; margin-top: 12px;">
+                🔒 اتصال نظير إلى نظير | لا نخزن بياناتك
+            </p>
         </div>
-        
     </div>
 </main>
 
 <footer>
-    <p>© 2026 ScreenSpark | جميع الحقوق محفوظة | General Fix Team</p>
+    <p>© 2026 ScreenSpark | تصميم احترافي • مشاركة فورية • General Fix Team</p>
 </footer>
 
-<div id="toast" class="toast"></div>
+<div id="toastMessage" class="toast"></div>
 
 <script>
-    // ==================== الثيمات ====================
+    // Helper
+    function showToast(msg, isError = false) {
+        const toast = document.getElementById('toastMessage');
+        toast.textContent = msg;
+        toast.style.background = isError ? '#ef4444' : '#10b981';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    // Theme (light/dark/gold)
     let currentTheme = localStorage.getItem('screenspark_theme') || 'dark';
     function setTheme(theme) {
-        document.body.classList.remove('light-mode', 'gold-mode');
-        if (theme === 'light') document.body.classList.add('light-mode');
-        if (theme === 'gold') document.body.classList.add('gold-mode');
+        const root = document.documentElement;
+        if (theme === 'light') {
+            root.style.setProperty('--bg-primary', '#f8fafc');
+            root.style.setProperty('--text-primary', '#0f172a');
+            // تبسيط: نغير خلفية البادي
+            document.body.style.background = '#f1f5f9';
+        } else if (theme === 'gold') {
+            document.body.style.background = '#1a1500';
+            root.style.setProperty('--text-primary', '#ffd700');
+        } else {
+            document.body.style.background = 'radial-gradient(circle at 20% 30%, #0f172a, #020617)';
+        }
         localStorage.setItem('screenspark_theme', theme);
-        currentTheme = theme;
     }
-    function toggleTheme() {
+    document.getElementById('themeToggleBtn').addEventListener('click', () => {
         const themes = ['dark', 'light', 'gold'];
-        const next = themes[(themes.indexOf(currentTheme) + 1) % themes.length];
-        setTheme(next);
-        showToast('🎨 تم تغيير الثيم');
-    }
-    document.getElementById('themeToggleBtn')?.addEventListener('click', toggleTheme);
-    setTheme(currentTheme);
-    
-    // ==================== شريط التقدم ====================
-    window.addEventListener('scroll', () => {
-        const winScroll = document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - window.innerHeight;
-        const scrolled = (winScroll / height) * 100;
-        document.getElementById('scrollProgress').style.width = scrolled + '%';
+        let next = themes[(themes.indexOf(currentTheme) + 1) % themes.length];
+        currentTheme = next;
+        setTheme(currentTheme);
+        showToast(`🎨 تم التبديل إلى ${next}`);
     });
-    
-    function showToast(msg, isError = false) {
-        const toast = document.getElementById('toast');
-        toast.textContent = msg;
-        toast.classList.toggle('error', isError);
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-    
-    // ==================== التحقق من دعم مشاركة الشاشة بشكل صحيح ====================
-    async function checkScreenShareSupport() {
-        // التحقق من وجود getUserMedia و getDisplayMedia
-        const hasGetUserMedia = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
-        const hasGetDisplayMedia = !!(navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia);
-        
-        // إذا كان المتصفح لا يدعمها نهائياً
-        if (!hasGetUserMedia || !hasGetDisplayMedia) {
-            return { supported: false, reason: 'missing_api' };
-        }
-        
-        // محاولة فعلية للحصول على الشاشة (اختبار حقيقي)
-        try {
-            const testStream = await navigator.mediaDevices.getDisplayMedia({ video: true, preferCurrentTab: true });
-            // إذا وصلنا هنا، الميزة مدعومة
-            testStream.getTracks().forEach(track => track.stop());
-            return { supported: true };
-        } catch (error) {
-            // المستخدم رفض الإذن أو الميزة معطلة
-            if (error.name === 'NotAllowedError') {
-                return { supported: false, reason: 'permission_denied', message: 'لم تسمح بمشاركة الشاشة' };
-            } else if (error.name === 'NotSupportedError') {
-                return { supported: false, reason: 'not_supported', message: 'المتصفح لا يدعم مشاركة الشاشة' };
-            } else {
-                return { supported: false, reason: 'other', message: error.message };
-            }
-        }
-    }
-    
-    // ==================== تهيئة الموقع ====================
-    async function init() {
-        const unsupportedBox = document.getElementById('unsupportedBox');
-        const mainInterface = document.getElementById('mainInterface');
-        
-        // إظهار واجهة التحميل مؤقتاً
-        mainInterface.style.display = 'block';
-        unsupportedBox.style.display = 'none';
-        
-        // اختبار الدعم الفعلي
-        const support = await checkScreenShareSupport();
-        
-        if (!support.supported) {
-            // إخفاء الواجهة الرئيسية وإظهار رسالة الدعم
-            mainInterface.style.display = 'none';
-            unsupportedBox.style.display = 'block';
-            
-            if (support.reason === 'permission_denied') {
-                // المستخدم رفض الإذن سابقاً، نطلب منه إعادة المحاولة
-                unsupportedBox.innerHTML = `
-                    <i class="fas fa-lock"></i>
-                    <h3>🔒 نحتاج إلى إذنك لمشاركة الشاشة</h3>
-                    <p>لم تسمح بمشاركة الشاشة في المحاولة السابقة</p>
-                    <button class="action-btn" id="retryPermissionBtn" style="margin-top: 15px;">
-                        <i class="fas fa-redo"></i> إعادة المحاولة
-                    </button>
-                `;
-                document.getElementById('retryPermissionBtn')?.addEventListener('click', () => {
-                    location.reload();
-                });
-            } else if (support.reason === 'not_supported') {
-                // المتصفح لا يدعم الميزة نهائياً
-                unsupportedBox.innerHTML = `
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>⚠️ متصفحك لا يدعم مشاركة الشاشة</h3>
-                    <p>ميزة مشاركة الشاشة تحتاج إلى تفعيل يدوي</p>
-                    <div class="fix-steps">
-                        <p style="font-weight: 700; margin-bottom: 10px;">🔧 كيفية التفعيل في Chrome:</p>
-                        <ol style="padding-right: 20px;">
-                            <li>1. اكتب في شريط العناوين: <code style="background: #000; padding: 2px 6px; border-radius: 6px;">chrome://flags/#enable-webrtc-getdisplaymedia</code></li>
-                            <li>2. ابحث عن <strong>WebRTC getDisplayMedia</strong></li>
-                            <li>3. غير الإعداد من <strong>Default</strong> إلى <strong>Enabled</strong></li>
-                            <li>4. أعد تشغيل المتصفح</li>
-                        </ol>
-                        <p style="margin-top: 15px; color: var(--warning);">💡 بديل سريع: استخدم متصفح <strong>Edge</strong> أو <strong>Firefox</strong> مباشرة بدون أي إعدادات</p>
-                    </div>
-                `;
-            }
-        }
-    }
-    
-    // بدء التطبيق
-    init();
-    
-    // ==================== باقي دوال WebRTC (نفس الكود السابق مع تعديلات بسيطة) ====================
+    setTheme(currentTheme);
+
+    // WebRTC variables
     let localStream = null;
     let peerConnection = null;
     let currentRoomId = null;
-    let isSharing = false;
-    
+
     const configuration = {
         iceServers: [
             { urls: 'stun:stun.l.google.com:19302' },
@@ -555,160 +419,145 @@
             { urls: 'turn:turn.anyfirewall.com:443?transport=tcp', username: 'webrtc', credential: 'webrtc' }
         ]
     };
-    
-    function sendSignalingMessage(message) {
-        if (!currentRoomId) return;
-        const key = `signaling_${currentRoomId}`;
-        const existing = JSON.parse(localStorage.getItem(key) || '[]');
-        existing.push({ ...message, from: 'local', timestamp: Date.now() });
-        localStorage.setItem(key, JSON.stringify(existing));
-        checkSignalingMessages();
+
+    function generateRoomId() {
+        return Math.random().toString(36).substring(2, 8).toUpperCase();
     }
-    
-    function checkSignalingMessages() {
-        if (!currentRoomId) return;
-        const key = `signaling_${currentRoomId}`;
-        const messages = JSON.parse(localStorage.getItem(key) || '[]');
-        const unprocessed = messages.filter(m => !m.processed);
-        
-        for (const msg of unprocessed) {
-            msg.processed = true;
-            if (msg.type === 'offer' && peerConnection && peerConnection.signalingState !== 'stable') {
-                peerConnection.setRemoteDescription(new RTCSessionDescription(msg.offer)).then(() => {
-                    return peerConnection.createAnswer();
-                }).then(answer => {
-                    return peerConnection.setLocalDescription(answer);
-                }).then(() => {
-                    sendSignalingMessage({ type: 'answer', answer: peerConnection.localDescription });
-                }).catch(e => console.error(e));
-            } else if (msg.type === 'answer' && peerConnection) {
-                peerConnection.setRemoteDescription(new RTCSessionDescription(msg.answer)).catch(e => console.error(e));
-            } else if (msg.type === 'ice' && peerConnection) {
-                peerConnection.addIceCandidate(new RTCIceCandidate(msg.candidate)).catch(e => console.error(e));
-            }
-        }
-        
-        localStorage.setItem(key, JSON.stringify(messages));
-        setTimeout(checkSignalingMessages, 500);
-    }
-    
+
     async function createPeerConnection() {
         peerConnection = new RTCPeerConnection(configuration);
         if (localStream) {
             localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
         }
         peerConnection.ontrack = (event) => {
-            const remoteVideo = document.getElementById('remoteVideo');
-            if (remoteVideo.srcObject !== event.streams[0]) {
-                remoteVideo.srcObject = event.streams[0];
-                document.getElementById('videoArea').style.display = 'block';
+            const video = document.getElementById('remoteVideo');
+            if (video.srcObject !== event.streams[0]) {
+                video.srcObject = event.streams[0];
+                document.getElementById('videoContainer').style.display = 'flex';
             }
         };
         peerConnection.onicecandidate = (event) => {
-            if (event.candidate) sendSignalingMessage({ type: 'ice', candidate: event.candidate });
+            if (event.candidate) {
+                sendSignal({ type: 'ice', candidate: event.candidate });
+            }
         };
+        return peerConnection;
     }
-    
-    async function startScreenShare() {
+
+    function sendSignal(msg) {
+        if (!currentRoomId) return;
+        const key = `webrtc_signal_${currentRoomId}`;
+        const existing = JSON.parse(localStorage.getItem(key) || '[]');
+        existing.push({ ...msg, timestamp: Date.now() });
+        localStorage.setItem(key, JSON.stringify(existing));
+        pollSignals();
+    }
+
+    function pollSignals() {
+        if (!currentRoomId) return;
+        const key = `webrtc_signal_${currentRoomId}`;
+        const data = JSON.parse(localStorage.getItem(key) || '[]');
+        const unprocessed = data.filter(m => !m.processed);
+        for (let msg of unprocessed) {
+            msg.processed = true;
+            if (msg.type === 'offer' && peerConnection && peerConnection.signalingState !== 'stable') {
+                peerConnection.setRemoteDescription(new RTCSessionDescription(msg.offer))
+                    .then(() => peerConnection.createAnswer())
+                    .then(answer => peerConnection.setLocalDescription(answer))
+                    .then(() => sendSignal({ type: 'answer', answer: peerConnection.localDescription }))
+                    .catch(e => console.warn(e));
+            } else if (msg.type === 'answer' && peerConnection) {
+                peerConnection.setRemoteDescription(new RTCSessionDescription(msg.answer)).catch(e => console.warn);
+            } else if (msg.type === 'ice' && peerConnection) {
+                peerConnection.addIceCandidate(new RTCIceCandidate(msg.candidate)).catch(e => console.warn);
+            }
+        }
+        localStorage.setItem(key, JSON.stringify(data));
+        setTimeout(pollSignals, 800);
+    }
+
+    async function startSharing() {
         try {
-            const stream = await navigator.mediaDevices.getDisplayMedia({
-                video: { cursor: "always", displaySurface: "monitor" },
-                audio: true,
-                preferCurrentTab: true
-            });
+            const stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true, preferCurrentTab: true });
+            if (localStream) localStream.getTracks().forEach(t => t.stop());
             localStream = stream;
-            isSharing = true;
-            document.getElementById('startShareBtn').style.display = 'none';
-            document.getElementById('stopShareBtn').style.display = 'inline-flex';
             await createPeerConnection();
             if (peerConnection) {
                 const offer = await peerConnection.createOffer();
                 await peerConnection.setLocalDescription(offer);
-                sendSignalingMessage({ type: 'offer', offer: peerConnection.localDescription });
+                sendSignal({ type: 'offer', offer });
             }
+            document.getElementById('startShareBtn').classList.add('hidden');
+            document.getElementById('stopShareBtn').classList.remove('hidden');
             showToast('✅ بدأت مشاركة الشاشة');
-            stream.getVideoTracks()[0].onended = () => stopScreenShare();
-        } catch (error) {
-            showToast('❌ فشل مشاركة الشاشة: ' + error.message, true);
+            stream.getVideoTracks()[0].onended = () => stopSharing();
+        } catch (err) {
+            showToast('❌ فشل مشاركة الشاشة: ' + err.message, true);
         }
     }
-    
-    function stopScreenShare() {
-        if (localStream) localStream.getTracks().forEach(track => track.stop());
+
+    function stopSharing() {
+        if (localStream) localStream.getTracks().forEach(t => t.stop());
         if (peerConnection) peerConnection.close();
         localStream = null;
         peerConnection = null;
-        isSharing = false;
-        document.getElementById('startShareBtn').style.display = 'inline-flex';
-        document.getElementById('stopShareBtn').style.display = 'none';
+        document.getElementById('startShareBtn').classList.remove('hidden');
+        document.getElementById('stopShareBtn').classList.add('hidden');
         document.getElementById('remoteVideo').srcObject = null;
-        document.getElementById('videoArea').style.display = 'none';
-        showToast('⏹️ تم إيقاف مشاركة الشاشة');
+        document.getElementById('videoContainer').style.display = 'none';
+        showToast('⏹️ تم إيقاف المشاركة');
     }
-    
-    function generateRoomId() {
-        return Math.random().toString(36).substring(2, 8).toUpperCase();
-    }
-    
-    function createRoom() {
-        currentRoomId = generateRoomId();
-        const roomLink = `${window.location.origin}${window.location.pathname}?room=${currentRoomId}`;
-        document.getElementById('roomLinkDisplay').textContent = roomLink;
-        document.getElementById('mainActions').style.display = 'none';
-        document.getElementById('sharingPanel').style.display = 'block';
-        document.getElementById('joinPanel').style.display = 'none';
-        showToast('✅ تم إنشاء الغرفة بنجاح');
-    }
-    
-    function joinRoom() {
-        const roomId = document.getElementById('roomIdInput').value.trim().toUpperCase();
-        if (!roomId) { showToast('⚠️ أدخل رمز الغرفة', true); return; }
-        currentRoomId = roomId;
-        document.getElementById('mainActions').style.display = 'none';
-        document.getElementById('sharingPanel').style.display = 'block';
-        document.getElementById('joinPanel').style.display = 'none';
-        showToast('✅ تم الانضمام إلى الغرفة');
-    }
-    
-    function leaveRoom() {
-        stopScreenShare();
+
+    function leaveSession() {
+        stopSharing();
         currentRoomId = null;
-        document.getElementById('sharingPanel').style.display = 'none';
-        document.getElementById('mainActions').style.display = 'flex';
-        document.getElementById('joinPanel').style.display = 'none';
-        showToast('👋 تم مغادرة الغرفة');
+        document.getElementById('sessionPanel').classList.add('hidden');
+        document.getElementById('entrySection').classList.remove('hidden');
+        showToast('👋 خرجت من الجلسة');
     }
-    
-    function copyRoomLink() {
-        const link = document.getElementById('roomLinkDisplay').textContent;
-        navigator.clipboard.writeText(link).then(() => showToast('✅ تم نسخ الرابط'));
+
+    function createSession() {
+        currentRoomId = generateRoomId();
+        const url = `${window.location.origin}${window.location.pathname}?room=${currentRoomId}`;
+        document.getElementById('roomLinkDisplay').innerText = url;
+        document.getElementById('entrySection').classList.add('hidden');
+        document.getElementById('sessionPanel').classList.remove('hidden');
+        showToast('✅ تم إنشاء الجلسة');
+        pollSignals();
     }
-    
-    document.getElementById('createRoomBtn')?.addEventListener('click', createRoom);
-    document.getElementById('joinRoomBtn')?.addEventListener('click', () => {
-        document.getElementById('mainActions').style.display = 'none';
-        document.getElementById('joinPanel').style.display = 'block';
+
+    function joinSession() {
+        let room = document.getElementById('joinRoomInput').value.trim().toUpperCase();
+        if (!room) { showToast('⚠️ أدخل رمز الجلسة', true); return; }
+        currentRoomId = room;
+        document.getElementById('entrySection').classList.add('hidden');
+        document.getElementById('sessionPanel').classList.remove('hidden');
+        document.getElementById('roomLinkDisplay').innerText = window.location.origin + window.location.pathname + '?room=' + room;
+        showToast('✅ انضممت إلى الجلسة');
+        pollSignals();
+    }
+
+    // DOM elements
+    document.getElementById('createRoomBtn').addEventListener('click', createSession);
+    document.getElementById('joinRoomBtn').addEventListener('click', joinSession);
+    document.getElementById('startShareBtn').addEventListener('click', startSharing);
+    document.getElementById('stopShareBtn').addEventListener('click', stopSharing);
+    document.getElementById('leaveRoomBtn').addEventListener('click', leaveSession);
+    document.getElementById('copyLinkBtn').addEventListener('click', () => {
+        const link = document.getElementById('roomLinkDisplay').innerText;
+        navigator.clipboard.writeText(link);
+        showToast('📋 تم نسخ الرابط');
     });
-    document.getElementById('confirmJoinBtn')?.addEventListener('click', joinRoom);
-    document.getElementById('cancelJoinBtn')?.addEventListener('click', () => {
-        document.getElementById('mainActions').style.display = 'flex';
-        document.getElementById('joinPanel').style.display = 'none';
-    });
-    document.getElementById('startShareBtn')?.addEventListener('click', startScreenShare);
-    document.getElementById('stopShareBtn')?.addEventListener('click', stopScreenShare);
-    document.getElementById('leaveRoomBtn')?.addEventListener('click', leaveRoom);
-    document.getElementById('copyLinkBtn')?.addEventListener('click', copyRoomLink);
-    
-    const urlParams = new URLSearchParams(window.location.search);
-    const roomParam = urlParams.get('room');
-    if (roomParam) {
-        setTimeout(() => {
-            document.getElementById('roomIdInput').value = roomParam;
-            joinRoom();
-        }, 1000);
+
+    // auto join from url param
+    const urlRoom = new URLSearchParams(window.location.search).get('room');
+    if (urlRoom) {
+        document.getElementById('joinRoomInput').value = urlRoom;
+        joinSession();
     }
-    
-    setInterval(checkSignalingMessages, 1000);
+
+    // small trick: start polling after 1s
+    setTimeout(pollSignals, 1000);
 </script>
 </body>
 </html>
